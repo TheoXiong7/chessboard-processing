@@ -10,10 +10,6 @@ debug =  True
 
 
 class board_Recognition:
-	'''
-	This class handles the initialization of the board. It analyzes
-	the empty board finding its border, lines, corners, squares...
-	'''
 	def __init__(self):
 		pass
 		
@@ -40,8 +36,12 @@ class board_Recognition:
 			mask_green = cv2.inRange(img, lower_green, upper_green)
 			mask_white = cv2.inRange(img, lower_white, upper_white) 
 			mask_yellow = cv2.inRange(img, lower_yellow, upper_yellow) 
-			mask = mask_white + mask_green + mask_yellow
+			mask = mask_white + mask_green
 			# Find edges
+			if debug:
+				cv2.imshow("mask", mask)
+				cv2.waitKey(0)
+				cv2.destroyAllWindows()
 			edges,colorEdges = self.findEdges(mask)
 
 			# Find lines
